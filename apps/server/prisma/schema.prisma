@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Word {
+  id                 String   @id @default(cuid())
+  word               String
+  category           String
+  subCategory        String?
+  aliases            String? // 用 | 分隔，例如 垂柳|杨柳
+  similarWords       String? // 猜盐风格：JSON {"松树":68} 或 | 分隔
+  wrongButCloseWords String? // 看似接近但其实不对的词
+  forbiddenWords     String? // 禁用/作弊词
+  difficulty         Int      @default(1)
+  popularity         Int      @default(80)
+  funScore           Int      @default(80)
+  frequency          Float?
+  hint1              String?
+  hint2              String?
+  hint3              String?
+  source             String?
+  enabled            Boolean  @default(true)
+  embedding          String? // JSON 数组字符串，MVP 可这样存
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@unique([word, category])
+  @@index([category])
+  @@index([enabled])
+  @@index([difficulty])
+}
+
+model GiftEvent {
+  id          String   @id @default(cuid())
+  platform    String   @default("douyin")
+  roomId      String?
+  platformUid String
+  nickname    String
+  giftName    String
+  giftCount   Int      @default(1)
+  giftValue   Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@index([platformUid])
+  @@index([platform])
+}
+
+model Player {
+  id          String   @id @default(cuid())
+  platform    String   @default("debug")
+  platformUid String
+  nickname    String
+  avatar      String?
+  totalScore  Int      @default(0)
+  correctNum  Int      @default(0)
+  guessNum    Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([platform, platformUid])
+  @@index([totalScore])
+}
+
+model GameRound {
+  id              String    @id @default(cuid())
+  wordId          String
+  answerWord      String
+  category        String
+  subCategory     String?
+  difficulty      Int
+  durationSeconds Int
+  status          String    @default("waiting")
+  startedAt       DateTime?
+  endedAt         DateTime?
+  winnerPlayerId  String?
+  winnerNickname  String?
+  createdAt       DateTime  @default(now())
+
+  guesses Guess[]
+}
+
+model Guess {
+  id         String   @id @default(cuid())
+  roundId    String
+  playerId   String
+  nickname   String
+  rawText    String
+  guessWord  String
+  similarity Float
+  isCorrect  Boolean  @default(false)
+  scoreAdded Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  round GameRound @relation(fields: [roundId], references: [id])
+
+  @@index([roundId])
+  @@index([playerId])
+  @@index([similarity])
+}
+
+model GameConfig {
+  id                   String   @id @default(cuid())
+  roundDurationSeconds Int      @default(300)
+  defaultCategory      String?
+  autoNextRound        Boolean  @default(false)
+  hintEnabled          Boolean  @default(true)
+  correctThreshold     Float    @default(0.98)
+  topRankLimit         Int      @default(15)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}

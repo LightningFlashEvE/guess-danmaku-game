@@ -1,0 +1,23 @@
+node_modules/
+dist/
+build/
+.env
+*.log
+*.tsbuildinfo
+output/
+.agents/
+.codex/
+
+# Prisma / SQLite
+apps/server/prisma/*.db
+apps/server/prisma/*.db-journal
+apps/server/dev.db
+apps/server/dev.db-journal
+
+# Vite
+apps/web/dist/
+.vite/
+
+# OS
+.DS_Store
+Thumbs.db

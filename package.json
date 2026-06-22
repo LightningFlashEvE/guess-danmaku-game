@@ -1,0 +1,22 @@
+{
+  "name": "guess-danmaku-game",
+  "version": "0.1.0",
+  "private": true,
+  "description": "弹幕猜词语义相似度直播互动游戏",
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "db:migrate": "pnpm --filter server prisma migrate dev",
+    "db:push": "pnpm --filter server prisma db push",
+    "db:seed": "pnpm --filter server db:seed",
+    "db:generate": "pnpm --filter server prisma generate"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@10.33.2",
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "prisma", "@prisma/client", "@prisma/engines"]
+  }
+}
