@@ -31,10 +31,10 @@ export default function Timer({ remainingSeconds, durationSeconds, compact }: Ti
             </div>
           </>
         ) : (
-          <div className="relative w-full h-full rounded-full border-2 border-cyber-cyan/50 shadow-[0_0_8px_rgba(6,182,212,0.3)] flex items-center justify-center">
-            <svg viewBox="0 0 24 24" className="w-2/3 h-2/3 text-cyber-cyan" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M12 6v6l4 2" />
+          <div className="relative flex h-full w-full items-center justify-center">
+            <svg viewBox="0 0 24 24" className="h-full w-full text-slate-800" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7.5V12l3 2" />
             </svg>
           </div>
         )}
@@ -44,9 +44,9 @@ export default function Timer({ remainingSeconds, durationSeconds, compact }: Ti
         {!compact && <span className="text-[10px] text-white/50 tracking-widest uppercase">Time Left</span>}
         <div className="flex items-baseline gap-1">
           <span
-            className={`font-mono font-black tabular-nums leading-none ${
-              compact ? 'text-2xl' : 'text-4xl'
-            } ${urgent ? 'text-cyber-pink text-glow drop-shadow-[0_0_8px_rgba(244,63,94,0.8)]' : 'text-white text-glow'}`}
+            className={`inline-flex min-w-[60px] items-center font-mono font-black tabular-nums leading-none ${
+              compact ? 'h-[25px] text-[30px]' : 'text-4xl'
+            } ${urgent ? 'text-cyber-pink text-glow drop-shadow-[0_0_8px_rgba(244,63,94,0.8)]' : 'text-slate-950 text-glow'}`}
           >
             {format(remainingSeconds)}
           </span>

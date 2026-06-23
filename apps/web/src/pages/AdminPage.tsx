@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../lib/api';
+import { rankBadgeClass } from '../lib/rank-style';
 import { useGameStore } from '../stores/gameStore';
 import type { GameConfig } from '../types';
 
@@ -357,7 +358,7 @@ export default function AdminPage() {
                           <span className="font-medium text-white/90 text-sm max-w-[120px] truncate">{p.nickname}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 uppercase tracking-wider">{p.rankName}</span>
+                          <span className={`rounded-full border px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider shadow-sm ${rankBadgeClass(p.rankName)}`}>{p.rankName}</span>
                           <span className="font-mono font-bold text-white w-12 text-right">{p.totalScore}</span>
                         </div>
                       </div>

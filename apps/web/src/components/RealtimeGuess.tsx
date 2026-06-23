@@ -45,7 +45,7 @@ export default function RealtimeGuess({ guesses, limit = 8, compact }: Props) {
 
   if (list.length === 0) {
     return (
-      <div className={`h-full flex items-center justify-center text-white/65 font-medium ${compact ? 'text-xs' : 'text-sm'}`}>
+      <div className={`h-full flex items-center justify-center text-slate-500 font-medium ${compact ? 'text-xs' : 'text-sm'}`}>
         <span className="animate-pulse">等待弹幕...</span>
       </div>
     );
