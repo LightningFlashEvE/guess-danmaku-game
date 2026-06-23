@@ -72,7 +72,7 @@ export default function CurrentWordCard({ round, reveal, showHintCapsule = true,
   const letters = round ? Array.from({ length: round.wordLength }, (_, i) => i) : [];
 
   return (
-    <div className={`word-card-shell relative ${compact ? 'rounded-xl p-2' : 'rounded-2xl p-4'}`}>
+    <div className={`word-card-shell relative ${compact ? 'rounded-xl' : 'rounded-2xl p-4'}`}>
       <div className="word-card-shadow" />
       <div className={`word-paper-card relative z-10 flex items-center ${compact ? 'min-h-[88px] px-3 py-3' : 'min-h-[180px] px-6 py-7'}`}>
         {showHintCapsule ? (

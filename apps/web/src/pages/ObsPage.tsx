@@ -95,7 +95,7 @@ export default function ObsPage() {
         winners={lastWinnerNames}
       />
 
-      <div className="obs-canvas relative z-10 flex flex-col gap-3 px-3 py-3" style={scaleStyle}>
+      <div className="obs-canvas relative z-10 flex flex-col gap-2 px-3 py-3" style={scaleStyle}>
         {/* 标题 */}
         <section className="glass-panel rounded-2xl px-4 py-3 text-center">
           <h1 className="text-2xl font-black leading-tight tracking-widest text-slate-800">
